@@ -51,20 +51,20 @@ module vga_timing_gen(
         if(reset)
             begin
             
-            h_count <=10'd0;
-            v_count <=10'd0;
-            hsync <= 1'b1;     //both sync signals are active low, which means when its value is 0, its active 
+            h_count <=10'd0;   // 10 bits for each pixel counts, since their maximum value is 800 (including front porch,
+            v_count <=10'd0;   // (cont.) backporch, sync) for h_count and 525 for v_count
+            hsync <= 1'b1;     //**both sync signals are active low, which means when its value is 0, its active**
             vsync <= 1'b1;
-            vid_active <= 1'b0;
-            pixel_x <= 10'd0;
-            pixel_y <= 10'd0;
+            vid_active <= 1'b0; // high only when pixel count is in the drawing region (h_count<h_dis and v_count<v_dis)
+            pixel_x <= 10'd0;   //pixel coordinates on the grid, similar to how each element in matrix is referred to
+            pixel_y <= 10'd0;   // like row x,column y
         end
         else begin
             if(h_count < h_tot - 10'd1)begin
-                h_count = h_count+1;
+                h_count = h_count+1;   // h_count increments till its max value h_tot -1 (since indexing begins with 0
             end
             else begin
-                h_count=10'd0;
+                h_count=10'd0;  // when h_count reaches 799, it must reset to 0, and vcount must incremement by 1, unless it is its max value
                 if(v_count < v_tot -10'd1 )begin
                     v_count <= v_count+1;
                 end
@@ -74,17 +74,17 @@ module vga_timing_gen(
             end
                 
             if(h_count<h_dis && v_count<v_dis)begin
-                vid_active <= 1'd1;
-                pixel_x <= h_count;
+                vid_active <= 1'd1;    //when pixel counts are in actual display region(640x480 pixels)
+                pixel_x <= h_count;    // pixel counts are equal to h and v counts
                 pixel_y <= v_count;
             end
             else begin
                 vid_active <= 1'd0;
-                pixel_x = 10'd0;
-                pixel_y = 10'd0;
+                pixel_x = 10'd0;      //otherwise its just 0, since values cant immediately reset to 0, the buffers exist 
+                pixel_y = 10'd0;      // as the porches and sync, the values we took are the industry standard
             end
-            hsync <= ~((h_count >= h_dis+h_fp && h_count < h_dis + h_fp + h_sy));
-            vsync <= ~((v_count >= v_dis+v_fp && v_count < v_dis + v_fp + v_sy)); 
+            hsync <= ~((h_count >= h_dis+h_fp && h_count < h_dis + h_fp + h_sy)); //h/vsync must only be 0 when its in the
+            vsync <= ~((v_count >= v_dis+v_fp && v_count < v_dis + v_fp + v_sy)); //sync range, comes after front porch and before back
                                     
         end
     end         
