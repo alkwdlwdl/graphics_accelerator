@@ -61,10 +61,10 @@ module vga_timing_gen(
         end
         else begin
             if(h_count < h_tot - 10'd1)begin
-                h_count = h_count+1;   // h_count increments till its max value h_tot -1 (since indexing begins with 0
+                h_count <= h_count+1;   // h_count increments till its max value h_tot -1 (since indexing begins with 0
             end
             else begin
-                h_count=10'd0;  // when h_count reaches 799, it must reset to 0, and vcount must incremement by 1, unless it is its max value
+                h_count<=10'd0;  // when h_count reaches 799, it must reset to 0, and vcount must incremement by 1, unless it is its max value
                 if(v_count < v_tot -10'd1 )begin
                     v_count <= v_count+1;
                 end
@@ -80,8 +80,8 @@ module vga_timing_gen(
             end
             else begin
                 vid_active <= 1'd0;
-                pixel_x = 10'd0;      //otherwise its just 0, since values cant immediately reset to 0, the buffers exist 
-                pixel_y = 10'd0;      // as the porches and sync, the values we took are the industry standard
+                pixel_x <= 10'd0;      //otherwise its just 0, since values cant immediately reset to 0, the buffers exist 
+                pixel_y <= 10'd0;      // as the porches and sync, the values we took are the industry standard
             end
             hsync <= ~((h_count >= h_dis+h_fp && h_count < h_dis + h_fp + h_sy)); //h/vsync must only be 0 when its in the
             vsync <= ~((v_count >= v_dis+v_fp && v_count < v_dis + v_fp + v_sy)); //sync range, comes after front porch and before back
