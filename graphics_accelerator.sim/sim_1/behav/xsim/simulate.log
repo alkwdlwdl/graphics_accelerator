@@ -1,2 +1,10 @@
 Time resolution is 1 ps
-$finish called at time : 275 ns : File "C:/Users/aryan/graphics_accelerator/graphics_accelerator.srcs/sim_1/new/framebuffer_test.v" Line 71
+pass 0 (stalls OFF)
+ref_fill x0=4 y0=2 wd=4 ht=3 c=f0
+mismatch (x=4 y=2 w=4 h=3) at x=0 y=2: got1a, expected f0
+mismatch (x=4 y=2 w=4 h=3) at x=1 y=2: got21, expected f0
+mismatch (x=4 y=2 w=4 h=3) at x=2 y=2: got28, expected f0
+mismatch (x=4 y=2 w=4 h=3) at x=3 y=2: got2f, expected f0
+mismatch (x=4 y=2 w=4 h=3) at x=0 y=3: got27, expected f0
+Stopping at first failing fill
+$finish called at time : 125 ns : File "C:/Users/aryan/graphics_accelerator/graphics_accelerator.srcs/sim_1/new/rect_fill_test.v" Line 179
