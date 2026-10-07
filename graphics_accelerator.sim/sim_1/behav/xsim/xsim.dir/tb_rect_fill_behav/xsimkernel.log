@@ -1,0 +1,7 @@
+Running: xsim.dir/tb_rect_fill_behav/xsimk.exe -simmode gui -wdb tb_rect_fill_behav.wdb -simrunnum 0 -socket 50577
+Design successfully loaded
+Design Loading Memory Usage: 18784 KB (Peak: 18784 KB)
+Design Loading CPU Usage: 46 ms
+Simulation completed
+Simulation Memory Usage: 27744 KB (Peak: 27744 KB)
+Simulation CPU Usage: 2233 ms
