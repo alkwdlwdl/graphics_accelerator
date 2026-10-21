@@ -1,0 +1,4 @@
+Running: xsim.dir/rect_fill_test_behav/xsimk.exe -simmode gui -wdb rect_fill_test_behav.wdb -simrunnum 0 -socket 59812
+Design successfully loaded
+Design Loading Memory Usage: 18864 KB (Peak: 18864 KB)
+Design Loading CPU Usage: 46 ms
