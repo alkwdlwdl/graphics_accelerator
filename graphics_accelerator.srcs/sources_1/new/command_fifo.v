@@ -95,4 +95,3 @@ module command_fifo #(
     assign full  = full_reg;
 
 endmodule
-
