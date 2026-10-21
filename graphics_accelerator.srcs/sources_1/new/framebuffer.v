@@ -32,8 +32,8 @@ module framebuffer#(
     input [color_bits-1:0]wr_data,
     input wr_en,
     //read port stuff 
-    input [9:0]pixel_x,
-    input [9:0]pixel_y,
+    input [$clog2(xres)-1:0]pixel_x,
+    input [$clog2(yres)-1:0]pixel_y,
     output [color_bits-1:0]rd_data
     );
     
