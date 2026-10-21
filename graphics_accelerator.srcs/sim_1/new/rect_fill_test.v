@@ -110,7 +110,7 @@ task ref_fill(input integer x0,y0,wd,ht, input [color-1:0]c);
     begin
         $display("ref_fill x0=%0d y0=%0d wd=%0d ht=%0d c=%h", x0, y0, wd, ht, c);
         for(y=y0;y<y0+ht;y=y+1) begin
-            for(x=0;x<x0+wd;x=x+1) begin
+            for(x=x0;x<x0+wd;x=x+1) begin
                 exp_px[y*xres + x] = c;
             end
         end
@@ -174,10 +174,10 @@ task do_fill(input integer x,y,wd,ht,input[color-1:0]c);
         ref_fill(x,y,wd,ht,c);
         $sformat(label_s,"x=%0d y=%0d w=%0d h=%0d",x,y,wd,ht);
         check_all(label_s);
-        if (errors != 0) begin
-            $display("Stopping at first failing fill");
-            $finish;
-        end
+//        if (errors != 0) begin
+//            $display("Stopping at first failing fill");
+//            $finish;
+//        end
     end
 endtask
 
